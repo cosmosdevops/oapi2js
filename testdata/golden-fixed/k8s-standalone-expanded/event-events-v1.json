@@ -1,0 +1,55 @@
+{
+  "type": "object",
+  "required": [
+    "eventTime"
+  ],
+  "properties": {
+    "apiVersion": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "events.k8s.io/v1"
+      ]
+    },
+    "kind": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "Event"
+      ]
+    },
+    "eventTime": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "regarding": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  },
+  "x-kubernetes-group-version-kind": [
+    {
+      "group": "events.k8s.io",
+      "kind": "Event",
+      "version": "v1"
+    }
+  ],
+  "$schema": "http://json-schema.org/schema#"
+}

@@ -1,0 +1,56 @@
+{
+  "type": "object",
+  "required": [
+    "selector"
+  ],
+  "properties": {
+    "replicas": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "format": "int32"
+    },
+    "selector": {
+      "type": "object",
+      "additionalProperties": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "maxSurge": {
+      "$ref": "_definitions.json#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString"
+    },
+    "ports": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "_definitions.json#/definitions/io.k8s.api.core.v1.ContainerPort"
+      }
+    },
+    "resources": {
+      "$ref": "_definitions.json#/definitions/io.k8s.api.core.v1.ResourceRequirements"
+    },
+    "inline": {
+      "oneOf": [
+        {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        {
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
+      ]
+    }
+  },
+  "$schema": "http://json-schema.org/schema#"
+}

@@ -1,0 +1,19 @@
+{
+  "type": "object",
+  "properties": {
+    "pets": {
+      "type": "array",
+      "items": {
+        "$ref": "pet.json"
+      }
+    },
+    "byName": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "pet.json"
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/schema#",
+  "additionalProperties": false
+}

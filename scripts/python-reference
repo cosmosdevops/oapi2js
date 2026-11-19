@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Run the original Python openapi2jsonschema (instrumenta, pinned, with the
+# no-properties patch) in Docker. Used to make golden files and to compare.
+#
+#   scripts/python-reference <spec> <outdir> [flags...]
+set -euo pipefail
+
+root=$(cd "$(dirname "$0")/.." && pwd)
+image=${PYTHON_IMAGE:-openapi2jsonschema-python}
+spec=$(realpath "$1") out=$(realpath -m "$2")
+shift 2
+
+built=$(docker build -q -t "$image" "$root/testdata/python" 2>&1) || { echo "$built" >&2; exit 1; }
+mkdir -p "$out"
+# The Python tool resolves --stand-alone refs against cwd/output, so -o has
+# to be relative. Labelled so container-crash alerters ignore failures.
+docker run --rm --label ntfy.ignore=true --user "$(id -u):$(id -g)" \
+  -v "$(dirname "$spec"):/spec:ro" -v "$out:/work/out" -w /work \
+  "$image" -o out "$@" "/spec/$(basename "$spec")"

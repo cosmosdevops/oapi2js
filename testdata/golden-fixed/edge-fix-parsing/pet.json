@@ -1,0 +1,112 @@
+{
+  "type": "object",
+  "description": "A pet \u2014 with \u201cunicode\u201d, an emoji \ud83d\udc36, \"quotes\", a \\ backslash, a \u0001 control character and a \u007f delete",
+  "required": [
+    "name"
+  ],
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "description": "a property literally called type"
+    },
+    "weight": {
+      "type": "number",
+      "minimum": 0.5,
+      "maximum": 1000.0,
+      "multipleOf": 0.25,
+      "default": 150.0
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "$ref": "_definitions.json#/definitions/Tag"
+      }
+    },
+    "owner": {
+      "$ref": "_definitions.json#/definitions/Owner",
+      "description": "dropped when inlined",
+      "readOnly": true,
+      "x-note": "an extension",
+      "type": "string"
+    },
+    "attributes": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "_definitions.json#/definitions/Tag"
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "available",
+        "sold"
+      ]
+    },
+    "port": {
+      "type": "string",
+      "format": "int-or-string"
+    },
+    "address": {
+      "type": "object",
+      "required": [
+        "street"
+      ],
+      "properties": {
+        "street": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "geo": {
+          "type": "object",
+          "properties": {
+            "lat": {
+              "type": "number"
+            }
+          }
+        }
+      }
+    },
+    "big": {
+      "type": "integer",
+      "default": 123456789012345678901234567890
+    },
+    "negativeZero": {
+      "type": "integer",
+      "default": 0
+    },
+    "tiny": {
+      "type": "number",
+      "default": 1e-05
+    },
+    "huge": {
+      "type": "number",
+      "default": 1.2345678901234568e+16
+    },
+    "unsignedExponent": {
+      "type": "number",
+      "default": 15000000000.0
+    },
+    "flag": {
+      "type": "boolean",
+      "default": true
+    },
+    "nothing": {
+      "default": null
+    },
+    "empty": {
+      "type": "object",
+      "properties": {}
+    },
+    "emptyList": {
+      "type": "array",
+      "items": {},
+      "enum": []
+    }
+  },
+  "$schema": "http://json-schema.org/schema#"
+}

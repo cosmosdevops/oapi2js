@@ -1,0 +1,567 @@
+{
+  "definitions": {
+    "io.k8s.api.core.v1.ConfigMap": {
+      "description": "ConfigMap holds configuration data for pods to consume.",
+      "type": "object",
+      "properties": {
+        "apiVersion": {
+          "description": "APIVersion defines the versioned schema of this representation of an object.",
+          "type": "string",
+          "enum": [
+            "v1"
+          ]
+        },
+        "kind": {
+          "description": "Kind is a string value representing the REST resource this object represents.",
+          "type": "string",
+          "enum": [
+            "ConfigMap"
+          ]
+        },
+        "metadata": {
+          "description": "Standard object's metadata.",
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta"
+        },
+        "data": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "immutable": {
+          "type": "boolean"
+        }
+      },
+      "x-kubernetes-group-version-kind": [
+        {
+          "group": "",
+          "kind": "ConfigMap",
+          "version": "v1"
+        }
+      ],
+      "additionalProperties": false
+    },
+    "io.k8s.api.core.v1.ConfigMapList": {
+      "type": "object",
+      "required": [
+        "items"
+      ],
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "v1"
+          ]
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/io.k8s.api.core.v1.ConfigMap"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "ConfigMapList"
+          ]
+        },
+        "metadata": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta"
+        }
+      },
+      "x-kubernetes-group-version-kind": [
+        {
+          "group": "",
+          "kind": "ConfigMapList",
+          "version": "v1"
+        }
+      ],
+      "additionalProperties": false
+    },
+    "io.k8s.api.core.v1.ContainerPort": {
+      "type": "object",
+      "required": [
+        "containerPort"
+      ],
+      "properties": {
+        "containerPort": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string"
+        },
+        "protocol": {
+          "type": "string",
+          "enum": [
+            "SCTP",
+            "TCP",
+            "UDP"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "io.k8s.api.core.v1.ResourceRequirements": {
+      "type": "object",
+      "properties": {
+        "limits": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/io.k8s.apimachinery.pkg.api.resource.Quantity"
+          }
+        },
+        "requests": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/io.k8s.apimachinery.pkg.api.resource.Quantity"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "io.k8s.api.apps.v1.Deployment": {
+      "type": "object",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "apps/v1"
+          ]
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "Deployment"
+          ]
+        },
+        "metadata": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta"
+        },
+        "spec": {
+          "description": "Specification of the desired behavior of the Deployment.",
+          "$ref": "#/definitions/io.k8s.api.apps.v1.DeploymentSpec",
+          "x-kubernetes-patch-strategy": "merge"
+        }
+      },
+      "x-kubernetes-group-version-kind": [
+        {
+          "group": "apps",
+          "kind": "Deployment",
+          "version": "v1"
+        }
+      ],
+      "additionalProperties": false
+    },
+    "io.k8s.api.autoscaling.v2.HorizontalPodAutoscaler": {
+      "type": "object",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "autoscaling/v2"
+          ]
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "HorizontalPodAutoscaler"
+          ]
+        },
+        "metrics": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      },
+      "x-kubernetes-group-version-kind": [
+        {
+          "group": "autoscaling",
+          "kind": "HorizontalPodAutoscaler",
+          "version": "v2"
+        }
+      ],
+      "additionalProperties": false
+    },
+    "io.k8s.api.autoscaling.v1.HorizontalPodAutoscaler": {
+      "type": "object",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "autoscaling/v1"
+          ]
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "HorizontalPodAutoscaler"
+          ]
+        },
+        "targetCPUUtilizationPercentage": {
+          "type": "integer"
+        }
+      },
+      "x-kubernetes-group-version-kind": [
+        {
+          "group": "autoscaling",
+          "kind": "HorizontalPodAutoscaler",
+          "version": "v1"
+        }
+      ],
+      "additionalProperties": false
+    },
+    "io.k8s.api.autoscaling.v2beta2.HorizontalPodAutoscaler": {
+      "type": "object",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "autoscaling/v2beta2"
+          ]
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "HorizontalPodAutoscaler"
+          ]
+        }
+      },
+      "x-kubernetes-group-version-kind": [
+        {
+          "group": "autoscaling",
+          "kind": "HorizontalPodAutoscaler",
+          "version": "v2beta2"
+        }
+      ],
+      "additionalProperties": false
+    },
+    "io.k8s.api.core.v1.Event": {
+      "type": "object",
+      "required": [
+        "involvedObject",
+        "metadata"
+      ],
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "v1"
+          ]
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "Event"
+          ]
+        },
+        "involvedObject": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "metadata": {
+          "description": "Standard object's metadata.",
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta"
+        }
+      },
+      "x-kubernetes-group-version-kind": [
+        {
+          "group": "",
+          "kind": "Event",
+          "version": "v1"
+        }
+      ],
+      "additionalProperties": false
+    },
+    "io.k8s.api.events.v1.Event": {
+      "type": "object",
+      "required": [
+        "eventTime"
+      ],
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "events.k8s.io/v1"
+          ]
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "Event"
+          ]
+        },
+        "eventTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "regarding": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "x-kubernetes-group-version-kind": [
+        {
+          "group": "events.k8s.io",
+          "kind": "Event",
+          "version": "v1"
+        }
+      ],
+      "additionalProperties": false
+    },
+    "io.k8s.apimachinery.pkg.apis.meta.v1.Status": {
+      "type": "object",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "v1"
+          ]
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "Status"
+          ]
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "x-kubernetes-group-version-kind": [
+        {
+          "group": "",
+          "kind": "Status",
+          "version": "v1"
+        }
+      ],
+      "additionalProperties": false
+    },
+    "com.github.openshift.api.example.v1.Status": {
+      "type": "object",
+      "properties": {
+        "phase": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "io.k8s.api.apps.v1.DeploymentSpec": {
+      "type": "object",
+      "required": [
+        "selector"
+      ],
+      "properties": {
+        "replicas": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "selector": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "maxSurge": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString"
+        },
+        "ports": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/io.k8s.api.core.v1.ContainerPort"
+          }
+        },
+        "resources": {
+          "$ref": "#/definitions/io.k8s.api.core.v1.ResourceRequirements"
+        },
+        "inline": {
+          "type": "string",
+          "format": "int-or-string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "io.k8s.api.extensions.v1beta1.Deployment": {
+      "type": "object",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "extensions/v1beta1",
+            "apps/v1beta1"
+          ]
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "Deployment"
+          ]
+        },
+        "spec": {
+          "$ref": "#/definitions/io.k8s.api.apps.v1.DeploymentSpec"
+        }
+      },
+      "x-kubernetes-group-version-kind": [
+        {
+          "group": "extensions",
+          "kind": "Deployment",
+          "version": "v1beta1"
+        },
+        {
+          "group": "apps",
+          "kind": "Deployment",
+          "version": "v1beta1"
+        }
+      ],
+      "additionalProperties": false
+    },
+    "com.github.openshift.api.route.v1.Route": {
+      "type": "object",
+      "required": [
+        "spec"
+      ],
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "route.openshift.io/v1"
+          ]
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "Route"
+          ]
+        },
+        "metadata": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta"
+        },
+        "spec": {
+          "type": "object",
+          "required": [
+            "to"
+          ],
+          "properties": {
+            "host": {
+              "type": "string"
+            },
+            "to": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "weight": {
+                  "type": "integer"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "x-kubernetes-group-version-kind": [
+        {
+          "group": "route.openshift.io",
+          "kind": "Route",
+          "version": "v1"
+        }
+      ],
+      "additionalProperties": false
+    },
+    "io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "labels": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "creationTimestamp": {
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
+        }
+      },
+      "additionalProperties": false
+    },
+    "io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta": {
+      "type": "object",
+      "properties": {
+        "resourceVersion": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "io.k8s.apimachinery.pkg.apis.meta.v1.Time": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "io.k8s.apimachinery.pkg.api.resource.Quantity": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "number"
+        }
+      ]
+    },
+    "io.k8s.apimachinery.pkg.util.intstr.IntOrString": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "integer"
+        }
+      ]
+    },
+    "io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.JSONSchemaProps": {
+      "type": "object",
+      "properties": {
+        "$ref": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.JSONSchemaProps"
+          }
+        },
+        "type": {
+          "type": "string"
+        },
+        "additionalProperties": false
+      },
+      "additionalProperties": false
+    },
+    "io.k8s.kubernetes.pkg.apis.policy.v1beta1.Old": {
+      "type": "object",
+      "properties": {
+        "apiVersion": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

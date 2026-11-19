@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# Regenerate testdata/golden/ from the Python tool for every case in
+# testdata/cases.txt, except the --fix cases, which Python can't produce.
+set -euo pipefail
+
+root=$(cd "$(dirname "$0")/.." && pwd)
+while read -r name fixture flags; do
+  [[ -z $name || $name == \#* || $flags == *--fix-* ]] && continue
+  rm -rf "$root/testdata/golden/$name"
+  # shellcheck disable=SC2086
+  "$root/scripts/python-reference" "$root/testdata/fixtures/$fixture" \
+    "$root/testdata/golden/$name" $flags >/dev/null ||
+    echo "$name: python exited $?" >&2
+  echo "$name: $(find "$root/testdata/golden/$name" -name '*.json' | wc -l) files"
+done <"$root/testdata/cases.txt"

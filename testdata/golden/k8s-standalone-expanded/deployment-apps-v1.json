@@ -1,0 +1,219 @@
+{
+  "type": "object",
+  "properties": {
+    "apiVersion": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "apps/v1"
+      ]
+    },
+    "kind": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "Deployment"
+      ]
+    },
+    "metadata": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "namespace": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "labels": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "creationTimestamp": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        }
+      }
+    },
+    "spec": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "required": [
+        "selector"
+      ],
+      "properties": {
+        "replicas": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "int32"
+        },
+        "selector": {
+          "type": "object",
+          "additionalProperties": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "maxSurge": {
+          "oneOf": [
+            {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            {
+              "type": [
+                "integer",
+                "null"
+              ]
+            }
+          ]
+        },
+        "ports": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "required": [
+              "containerPort"
+            ],
+            "properties": {
+              "containerPort": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "name": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "protocol": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "enum": [
+                  "SCTP",
+                  "TCP",
+                  "UDP"
+                ]
+              }
+            }
+          }
+        },
+        "resources": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "limits": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "additionalProperties": {
+                "oneOf": [
+                  {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  }
+                ]
+              }
+            },
+            "requests": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "additionalProperties": {
+                "oneOf": [
+                  {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "inline": {
+          "oneOf": [
+            {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            {
+              "type": [
+                "integer",
+                "null"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "x-kubernetes-group-version-kind": [
+    {
+      "group": "apps",
+      "kind": "Deployment",
+      "version": "v1"
+    }
+  ],
+  "$schema": "http://json-schema.org/schema#"
+}

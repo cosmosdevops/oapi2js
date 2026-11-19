@@ -1,0 +1,29 @@
+{
+  "type": "object",
+  "properties": {
+    "$ref": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "properties": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": {
+        "$ref": "_definitions.json#/definitions/io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.JSONSchemaProps"
+      }
+    },
+    "type": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "additionalProperties": false
+  },
+  "additionalProperties": false,
+  "$schema": "http://json-schema.org/schema#"
+}

@@ -1,0 +1,5 @@
+{
+  "type": "string",
+  "format": "int-or-string",
+  "$schema": "http://json-schema.org/schema#"
+}

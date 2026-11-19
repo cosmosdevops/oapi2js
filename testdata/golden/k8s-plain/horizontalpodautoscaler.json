@@ -1,0 +1,19 @@
+{
+  "type": "object",
+  "properties": {
+    "apiVersion": {
+      "type": "string"
+    },
+    "kind": {
+      "type": "string"
+    }
+  },
+  "x-kubernetes-group-version-kind": [
+    {
+      "group": "autoscaling",
+      "kind": "HorizontalPodAutoscaler",
+      "version": "v2beta2"
+    }
+  ],
+  "$schema": "http://json-schema.org/schema#"
+}

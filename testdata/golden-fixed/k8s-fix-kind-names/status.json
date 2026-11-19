@@ -1,0 +1,34 @@
+{
+  "type": "object",
+  "properties": {
+    "apiVersion": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "kind": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "Status"
+      ]
+    },
+    "message": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "x-kubernetes-group-version-kind": [
+    {
+      "group": "",
+      "kind": "Status",
+      "version": "v1"
+    }
+  ],
+  "$schema": "http://json-schema.org/schema#"
+}

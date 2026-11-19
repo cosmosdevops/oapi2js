@@ -1,0 +1,40 @@
+{
+  "type": "object",
+  "required": [
+    "items"
+  ],
+  "properties": {
+    "apiVersion": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "$ref": "_definitions.json#/definitions/io.k8s.api.core.v1.ConfigMap"
+      }
+    },
+    "kind": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "ConfigMapList"
+      ]
+    },
+    "metadata": {
+      "$ref": "_definitions.json#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta"
+    }
+  },
+  "x-kubernetes-group-version-kind": [
+    {
+      "group": "",
+      "kind": "ConfigMapList",
+      "version": "v1"
+    }
+  ],
+  "$schema": "http://json-schema.org/schema#"
+}

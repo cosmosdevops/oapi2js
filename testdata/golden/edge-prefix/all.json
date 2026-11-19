@@ -1,0 +1,31 @@
+{
+  "oneOf": [
+    {
+      "$ref": "https://example.com/defs.json#/definitions/Pet"
+    },
+    {
+      "$ref": "https://example.com/defs.json#/definitions/Tag"
+    },
+    {
+      "$ref": "https://example.com/defs.json#/definitions/Owner"
+    },
+    {
+      "$ref": "https://example.com/defs.json#/definitions/TagMap"
+    },
+    {
+      "$ref": "https://example.com/defs.json#/definitions/PetAlias"
+    },
+    {
+      "$ref": "https://example.com/defs.json#/definitions/Composite"
+    },
+    {
+      "$ref": "https://example.com/defs.json#/definitions/Node"
+    },
+    {
+      "$ref": "https://example.com/defs.json#/definitions/Scalar"
+    },
+    {
+      "$ref": "https://example.com/defs.json#/definitions/\u00dcn\u00efc\u00f6d\u00e9"
+    }
+  ]
+}

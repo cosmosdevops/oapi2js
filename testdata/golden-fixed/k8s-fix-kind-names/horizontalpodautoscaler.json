@@ -1,0 +1,40 @@
+{
+  "type": "object",
+  "properties": {
+    "apiVersion": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "kind": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "HorizontalPodAutoscaler"
+      ]
+    },
+    "metrics": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": [
+          "object",
+          "null"
+        ]
+      }
+    }
+  },
+  "x-kubernetes-group-version-kind": [
+    {
+      "group": "autoscaling",
+      "kind": "HorizontalPodAutoscaler",
+      "version": "v2"
+    }
+  ],
+  "$schema": "http://json-schema.org/schema#"
+}

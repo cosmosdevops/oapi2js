@@ -1,0 +1,9 @@
+{
+  "type": "object",
+  "properties": {
+    "\u043a\u043b\u044e\u0447": {
+      "type": "string"
+    }
+  },
+  "$schema": "http://json-schema.org/schema#"
+}

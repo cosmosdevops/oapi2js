@@ -1,0 +1,190 @@
+{
+  "type": "object",
+  "properties": {
+    "apiVersion": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "extensions/v1beta1",
+        "apps/v1beta1"
+      ]
+    },
+    "kind": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "Deployment"
+      ]
+    },
+    "spec": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "required": [
+        "selector"
+      ],
+      "properties": {
+        "replicas": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "int32"
+        },
+        "selector": {
+          "type": "object",
+          "additionalProperties": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "maxSurge": {
+          "oneOf": [
+            {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            {
+              "type": [
+                "integer",
+                "null"
+              ]
+            }
+          ]
+        },
+        "ports": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "required": [
+              "containerPort"
+            ],
+            "properties": {
+              "containerPort": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "name": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "protocol": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "enum": [
+                  "SCTP",
+                  "TCP",
+                  "UDP"
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "resources": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "limits": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "additionalProperties": {
+                "oneOf": [
+                  {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  }
+                ]
+              }
+            },
+            "requests": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "additionalProperties": {
+                "oneOf": [
+                  {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "inline": {
+          "oneOf": [
+            {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            {
+              "type": [
+                "integer",
+                "null"
+              ]
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "x-kubernetes-group-version-kind": [
+    {
+      "group": "extensions",
+      "kind": "Deployment",
+      "version": "v1beta1"
+    },
+    {
+      "group": "apps",
+      "kind": "Deployment",
+      "version": "v1beta1"
+    }
+  ],
+  "additionalProperties": false,
+  "$schema": "http://json-schema.org/schema#"
+}

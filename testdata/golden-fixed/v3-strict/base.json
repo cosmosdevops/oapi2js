@@ -1,0 +1,11 @@
+{
+  "type": "object",
+  "description": "base",
+  "properties": {
+    "id": {
+      "type": "string"
+    }
+  },
+  "$schema": "http://json-schema.org/schema#",
+  "additionalProperties": false
+}

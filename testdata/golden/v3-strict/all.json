@@ -1,0 +1,28 @@
+{
+  "oneOf": [
+    {
+      "$ref": "Tag.json"
+    },
+    {
+      "$ref": "Pet.json"
+    },
+    {
+      "$ref": "Base.json"
+    },
+    {
+      "$ref": "Derived.json"
+    },
+    {
+      "$ref": "Order.json"
+    },
+    {
+      "$ref": "Forward.json"
+    },
+    {
+      "$ref": "Zed.json"
+    },
+    {
+      "$ref": "Shelter.json"
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "type": "object",
+  "required": [
+    "name"
+  ],
+  "description": "A pet in the store, written as a folded block.\n",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "tag": {
+      "$ref": "tag.json",
+      "description": "The pet's main tag."
+    },
+    "nickname": {
+      "type": "string",
+      "maxLength": 20
+    },
+    "alias": {
+      "type": "string",
+      "maxLength": 20
+    },
+    "vaccinated": {
+      "type": "boolean",
+      "default": "yes"
+    },
+    "legacyFlag": {
+      "type": "boolean",
+      "default": "off"
+    },
+    "mode": {
+      "type": "integer",
+      "default": 755
+    },
+    "mask": {
+      "type": "integer",
+      "default": 31
+    },
+    "duration": {
+      "type": "integer",
+      "default": "1:30"
+    },
+    "ratio": {
+      "type": "number",
+      "default": 1500.0
+    },
+    "notANumber": {
+      "type": "string",
+      "default": 1000.0
+    },
+    "version": {
+      "type": "string",
+      "example": 1.1
+    },
+    "quoted": {
+      "type": "string",
+      "default": "0755"
+    },
+    "tilde": {
+      "default": null
+    },
+    "price": {
+      "type": "number",
+      "multipleOf": 0.01,
+      "maximum": Infinity
+    }
+  },
+  "$schema": "http://json-schema.org/schema#"
+}

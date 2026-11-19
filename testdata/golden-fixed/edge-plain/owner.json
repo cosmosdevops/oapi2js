@@ -1,0 +1,15 @@
+{
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "$ref": "_definitions.json#/definitions/Tag"
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/schema#"
+}

@@ -1,0 +1,147 @@
+{
+  "type": "object",
+  "required": [
+    "selector"
+  ],
+  "properties": {
+    "replicas": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "format": "int32"
+    },
+    "selector": {
+      "type": "object",
+      "additionalProperties": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "maxSurge": {
+      "oneOf": [
+        {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        {
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
+      ]
+    },
+    "ports": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "required": [
+          "containerPort"
+        ],
+        "properties": {
+          "containerPort": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "protocol": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "SCTP",
+              "TCP",
+              "UDP"
+            ]
+          }
+        }
+      }
+    },
+    "resources": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "limits": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": {
+            "oneOf": [
+              {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              }
+            ]
+          }
+        },
+        "requests": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": {
+            "oneOf": [
+              {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    "inline": {
+      "oneOf": [
+        {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        {
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
+      ]
+    }
+  },
+  "$schema": "http://json-schema.org/schema#"
+}

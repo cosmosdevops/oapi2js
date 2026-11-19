@@ -1,0 +1,7 @@
+{
+  "type": "object",
+  "additionalProperties": {
+    "$ref": "_definitions.json#/definitions/Tag"
+  },
+  "$schema": "http://json-schema.org/schema#"
+}

@@ -1,0 +1,9 @@
+{
+  "type": "object",
+  "properties": {
+    "z": {
+      "type": "string"
+    }
+  },
+  "$schema": "http://json-schema.org/schema#"
+}

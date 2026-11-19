@@ -1,0 +1,5 @@
+{
+  "$ref": "https://example.com/defs.json#/definitions/Pet",
+  "$schema": "http://json-schema.org/schema#",
+  "type": "object"
+}

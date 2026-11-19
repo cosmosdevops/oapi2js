@@ -1,0 +1,17 @@
+{
+  "allOf": [
+    {
+      "$ref": "https://example.com/defs.json#/definitions/Tag"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "extra": {
+          "type": "string"
+        }
+      }
+    }
+  ],
+  "$schema": "http://json-schema.org/schema#",
+  "type": "object"
+}

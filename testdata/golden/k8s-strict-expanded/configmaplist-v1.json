@@ -1,0 +1,151 @@
+{
+  "type": "object",
+  "required": [
+    "items"
+  ],
+  "properties": {
+    "apiVersion": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "v1"
+      ]
+    },
+    "items": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "description": "ConfigMap holds configuration data for pods to consume.",
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "v1"
+            ]
+          },
+          "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "ConfigMap"
+            ]
+          },
+          "metadata": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "name": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "namespace": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "labels": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "additionalProperties": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "creationTimestamp": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date-time"
+              }
+            },
+            "additionalProperties": false
+          },
+          "data": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "additionalProperties": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "immutable": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          }
+        },
+        "x-kubernetes-group-version-kind": [
+          {
+            "group": "",
+            "kind": "ConfigMap",
+            "version": "v1"
+          }
+        ],
+        "additionalProperties": false
+      }
+    },
+    "kind": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "ConfigMapList"
+      ]
+    },
+    "metadata": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "resourceVersion": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "x-kubernetes-group-version-kind": [
+    {
+      "group": "",
+      "kind": "ConfigMapList",
+      "version": "v1"
+    }
+  ],
+  "additionalProperties": false,
+  "$schema": "http://json-schema.org/schema#"
+}

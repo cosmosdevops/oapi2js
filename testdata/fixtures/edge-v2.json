@@ -1,0 +1,74 @@
+{
+  "swagger": "2.0",
+  "info": {"title": "Edge cases", "version": "1.0"},
+  "paths": {},
+  "definitions": {
+    "Pet": {
+      "type": "object",
+      "description": "A pet — with “unicode”, an emoji 🐶, \"quotes\", a \\ backslash, a \u0001 control character and a \u007f delete",
+      "required": ["name"],
+      "properties": {
+        "name": {"type": "string"},
+        "type": {"type": "string", "description": "a property literally called type"},
+        "weight": {"type": "number", "minimum": 0.5, "maximum": 1e3, "multipleOf": 0.25, "default": 1.5E+2},
+        "tags": {"type": "array", "items": {"$ref": "#/definitions/Tag"}},
+        "owner": {"$ref": "#/definitions/Owner", "description": "dropped when inlined", "readOnly": true, "x-note": "an extension", "type": "string"},
+        "attributes": {"type": "object", "additionalProperties": {"$ref": "#/definitions/Tag"}},
+        "status": {"type": "string", "enum": ["available", "sold"]},
+        "port": {"type": "string", "format": "int-or-string"},
+        "address": {
+          "type": "object",
+          "required": ["street"],
+          "properties": {
+            "street": {"type": "string"},
+            "city": {"type": "string"},
+            "geo": {"type": "object", "properties": {"lat": {"type": "number"}}}
+          }
+        },
+        "big": {"type": "integer", "default": 123456789012345678901234567890},
+        "negativeZero": {"type": "integer", "default": -0},
+        "tiny": {"type": "number", "default": 0.00001},
+        "huge": {"type": "number", "default": 12345678901234567.0},
+        "unsignedExponent": {"type": "number", "default": 1.5e10},
+        "flag": {"type": "boolean", "default": true},
+        "nothing": {"default": null},
+        "empty": {"type": "object", "properties": {}},
+        "emptyList": {"type": "array", "items": {}, "enum": []}
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "id": {"type": "integer", "format": "int64"},
+        "label": {"type": "string"}
+      }
+    },
+    "Owner": {
+      "type": "object",
+      "properties": {
+        "name": {"type": "string"},
+        "tags": {"type": "array", "items": {"$ref": "#/definitions/Tag"}}
+      }
+    },
+    "TagMap": {
+      "type": "object",
+      "additionalProperties": {"$ref": "#/definitions/Tag"}
+    },
+    "PetAlias": {"$ref": "#/definitions/Pet"},
+    "Composite": {
+      "allOf": [
+        {"$ref": "#/definitions/Tag"},
+        {"type": "object", "properties": {"extra": {"type": "string"}}}
+      ]
+    },
+    "Node": {
+      "type": "object",
+      "properties": {
+        "value": {"type": "string"},
+        "children": {"type": "array", "items": {"$ref": "#/definitions/Node"}}
+      }
+    },
+    "Scalar": {"type": "string", "pattern": "^[a-z]+$"},
+    "Ünïcödé": {"type": "object", "properties": {"ключ": {"type": "string"}}}
+  }
+}

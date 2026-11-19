@@ -1,0 +1,34 @@
+{
+  "type": "object",
+  "required": [
+    "containerPort"
+  ],
+  "properties": {
+    "containerPort": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "format": "int32"
+    },
+    "name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "protocol": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "SCTP",
+        "TCP",
+        "UDP"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "$schema": "http://json-schema.org/schema#"
+}

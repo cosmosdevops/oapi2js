@@ -1,0 +1,50 @@
+{
+  "type": "object",
+  "required": [
+    "spec"
+  ],
+  "properties": {
+    "apiVersion": {
+      "type": "string",
+      "enum": [
+        "route.openshift.io/v1"
+      ]
+    },
+    "kind": {
+      "type": "string"
+    },
+    "metadata": {
+      "$ref": "_definitions.json#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta"
+    },
+    "spec": {
+      "type": "object",
+      "required": [
+        "to"
+      ],
+      "properties": {
+        "host": {
+          "type": "string"
+        },
+        "to": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "weight": {
+              "type": "integer"
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-kubernetes-group-version-kind": [
+    {
+      "group": "route.openshift.io",
+      "kind": "Route",
+      "version": "v1"
+    }
+  ],
+  "$schema": "http://json-schema.org/schema#"
+}

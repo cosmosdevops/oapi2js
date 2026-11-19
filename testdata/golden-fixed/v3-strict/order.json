@@ -1,0 +1,19 @@
+{
+  "allOf": [
+    {
+      "$ref": "pet.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "quantity": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    }
+  ],
+  "$schema": "http://json-schema.org/schema#",
+  "type": "object",
+  "additionalProperties": false
+}

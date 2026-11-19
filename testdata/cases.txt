@@ -1,0 +1,39 @@
+# Golden test cases: <name> <fixture> [flags...]
+#
+# Each case runs once into an empty directory. testdata/golden/<name>/ holds
+# what the Python openapi2jsonschema writes for it; regenerate with
+# scripts/update-golden.
+
+edge-plain                    edge-v2.json
+edge-standalone               edge-v2.json --stand-alone
+edge-strict                   edge-v2.json --strict
+edge-standalone-strict        edge-v2.json --stand-alone --strict
+edge-prefix                   edge-v2.json --prefix https://example.com/defs.json
+
+k8s-local                     kubernetes-v2.json --kubernetes
+k8s-local-expanded            kubernetes-v2.json --kubernetes --expanded
+k8s-standalone                kubernetes-v2.json --kubernetes --stand-alone
+k8s-standalone-expanded       kubernetes-v2.json --kubernetes --stand-alone --expanded
+k8s-strict                    kubernetes-v2.json --kubernetes --stand-alone --strict
+k8s-strict-expanded           kubernetes-v2.json --kubernetes --stand-alone --strict --expanded
+k8s-local-strict              kubernetes-v2.json --kubernetes --strict
+k8s-plain                     kubernetes-v2.json
+
+v3-plain                      petstore-v3.yaml
+v3-standalone                 petstore-v3.yaml --stand-alone
+v3-strict                     petstore-v3.yaml --strict
+v3-standalone-strict          petstore-v3.yaml --stand-alone --strict
+
+# Opt-in fixes. The Python tool has no equivalent, so these only have
+# golden-fixed output.
+edge-fix-parsing              edge-v2.json --fix-parsing
+v3-fix-parsing                petstore-v3.yaml --fix-parsing
+edge-fix-ref-siblings         edge-v2.json --stand-alone --fix-ref-siblings
+edge-fix-ref-siblings-strict  edge-v2.json --stand-alone --strict --fix-ref-siblings
+k8s-fix-ref-siblings          kubernetes-v2.json --kubernetes --stand-alone --strict --fix-ref-siblings
+v3-fix-ref-siblings           petstore-v3.yaml --stand-alone --fix-ref-siblings
+k8s-fix-nullable              kubernetes-v2.json --kubernetes --stand-alone --fix-nullable
+k8s-fix-nullable-local        kubernetes-v2.json --kubernetes --fix-nullable
+k8s-fix-kind-names            kubernetes-v2.json --kubernetes --fix-kind-names
+k8s-fix-kind-names-expanded   kubernetes-v2.json --kubernetes --expanded --fix-kind-names
+k8s-fix-all                   kubernetes-v2.json --kubernetes --stand-alone --strict --fix-all

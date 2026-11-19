@@ -1,0 +1,28 @@
+{
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "label": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "extra": {
+          "type": "string"
+        }
+      }
+    }
+  ],
+  "$schema": "http://json-schema.org/schema#",
+  "type": "object",
+  "additionalProperties": false
+}

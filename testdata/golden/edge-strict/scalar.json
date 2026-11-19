@@ -1,0 +1,6 @@
+{
+  "type": "string",
+  "pattern": "^[a-z]+$",
+  "$schema": "http://json-schema.org/schema#",
+  "additionalProperties": false
+}

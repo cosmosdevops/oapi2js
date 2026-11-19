@@ -1,0 +1,9 @@
+{
+  "type": "object",
+  "properties": {
+    "later": {
+      "$ref": "zed.json"
+    }
+  },
+  "$schema": "http://json-schema.org/schema#"
+}

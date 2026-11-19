@@ -1,0 +1,11 @@
+{
+  "type": "object",
+  "description": "merged from Base",
+  "properties": {
+    "id": {
+      "type": "string"
+    }
+  },
+  "$schema": "http://json-schema.org/schema#",
+  "additionalProperties": false
+}

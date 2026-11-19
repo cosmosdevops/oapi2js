@@ -1,0 +1,191 @@
+{
+  "definitions": {
+    "Pet": {
+      "type": "object",
+      "description": "A pet \u2014 with \u201cunicode\u201d, an emoji \ud83d\udc36, \"quotes\", a \\ backslash, a \u0001 control character and a \u007f delete",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "description": "a property literally called type"
+        },
+        "weight": {
+          "type": "number",
+          "minimum": 0.5,
+          "maximum": "1e3",
+          "multipleOf": 0.25,
+          "default": 150.0
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          }
+        },
+        "owner": {
+          "$ref": "#/definitions/Owner",
+          "description": "dropped when inlined",
+          "readOnly": true,
+          "x-note": "an extension",
+          "type": "string"
+        },
+        "attributes": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Tag"
+          }
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "available",
+            "sold"
+          ]
+        },
+        "port": {
+          "type": "string",
+          "format": "int-or-string"
+        },
+        "address": {
+          "type": "object",
+          "required": [
+            "street"
+          ],
+          "properties": {
+            "street": {
+              "type": "string"
+            },
+            "city": {
+              "type": "string"
+            },
+            "geo": {
+              "type": "object",
+              "properties": {
+                "lat": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        },
+        "big": {
+          "type": "integer",
+          "default": 123456789012345678901234567890
+        },
+        "negativeZero": {
+          "type": "integer",
+          "default": 0
+        },
+        "tiny": {
+          "type": "number",
+          "default": 1e-05
+        },
+        "huge": {
+          "type": "number",
+          "default": 1.2345678901234568e+16
+        },
+        "unsignedExponent": {
+          "type": "number",
+          "default": "1.5e10"
+        },
+        "flag": {
+          "type": "boolean",
+          "default": true
+        },
+        "nothing": {
+          "default": null
+        },
+        "empty": {
+          "type": "object",
+          "properties": {}
+        },
+        "emptyList": {
+          "type": "array",
+          "items": {},
+          "enum": []
+        }
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "label": {
+          "type": "string"
+        }
+      }
+    },
+    "Owner": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          }
+        }
+      }
+    },
+    "TagMap": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/Tag"
+      }
+    },
+    "PetAlias": {
+      "$ref": "#/definitions/Pet"
+    },
+    "Composite": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Tag"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "extra": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "Node": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Node"
+          }
+        }
+      }
+    },
+    "Scalar": {
+      "type": "string",
+      "pattern": "^[a-z]+$"
+    },
+    "\u00dcn\u00efc\u00f6d\u00e9": {
+      "type": "object",
+      "properties": {
+        "\u043a\u043b\u044e\u0447": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
