@@ -125,3 +125,10 @@ scripts/compare openapi.json --kubernetes --stand-alone --strict --expanded
 
 `testdata/python/` holds the Dockerfile and patch for the Python reference
 tool, copied from openshift-json-schema's `automation/generator`.
+
+## Licence
+
+Apache License 2.0, see [LICENSE](LICENSE). The files in
+`testdata/python/` build the original
+[instrumenta/openapi2jsonschema](https://github.com/instrumenta/openapi2jsonschema),
+which is also Apache-2.0.
