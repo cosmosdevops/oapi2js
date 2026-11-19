@@ -3,14 +3,10 @@
 Converts an OpenAPI specification (Swagger 2.0 or OpenAPI 3, JSON or YAML)
 into a directory of JSON Schema files, one per definition.
 
-It is a Go port of
+a Go reimagining of
 [instrumenta/openapi2jsonschema](https://github.com/instrumenta/openapi2jsonschema)
-(the version pinned by openshift-json-schema, plus its `no-properties.patch`).
-It takes the same flags and, for Kubernetes and OpenShift specs, writes
-**byte-identical output**, so tools like kubeconform see no difference. A few
-Python bugs are fixed (see below); `--python-compat` keeps them. It is much
-faster: a `--stand-alone` pass over an OpenShift spec takes about 1.5 seconds
-instead of about 10 minutes.
+with a few Python oddities fixed (see below); the original behaviour of openapi2jsonschema can be preserved with `--python-compat` .
+In my tests this is much faster, my `--stand-alone` passes over an OpenShift spec takes about 1.5 seconds.
 
 ## Usage
 
@@ -38,47 +34,9 @@ oapi2js [OPTIONS] SCHEMA_URL
 
 Options can come before or after `SCHEMA_URL`.
 
-### Kubernetes / OpenShift schemas
+### Fixed bugs compared to the original python
 
-This builds the same layout as kubernetes-json-schema and
-openshift-json-schema: `kind-group-version.json` and `kind.json` in one
-directory, from two runs.
-
-```sh
-for expanded in --expanded ""; do
-  oapi2js -o v5.0-standalone-strict --kubernetes $expanded \
-    --stand-alone --strict openapi.json
-done
-```
-
-With `--kubernetes` the tool:
-
-- fills in `apiVersion` and `kind` enums from `x-kubernetes-group-version-kind`;
-- lets `IntOrString` and `int-or-string` fields be a string or an integer, and
-  `Quantity` be a string or a number;
-- makes fields that aren't required accept `null`;
-- skips the old `io.k8s.kubernetes.pkg.*` types, and with `--stand-alone`
-  the CRD and `JSONSchemaProps` types, which can't be inlined.
-
-### Docker
-
-The image is a drop-in replacement for one built from the Python tool: same
-arguments, and the working directory is `/out`.
-
-```sh
-docker build -t oapi2js .
-docker run --rm -u "$(id -u):$(id -g)" -v "$PWD:/out" oapi2js \
-  -o schemas --kubernetes --stand-alone openapi.json
-```
-
-## Differences from the Python tool
-
-### Fixed bugs
-
-These are fixed by default. `--python-compat` brings them back, for output
-that matches the Python tool byte for byte in every case. None of them
-affect Kubernetes or OpenShift specs: v4.12 and v5.0 come out identical
-either way.
+`--python-compat` should produce output that matches the Python tool. Otherwise fixes include:
 
 - **OpenAPI 3 refs point at the wrong files.** Python rewrites
   `#/components/schemas/Tag` to `Tag.json` but writes `tag.json`, so the
@@ -103,8 +61,7 @@ either way.
 
 These are off by default, because they change published Kubernetes schemas
 (or, for `--fix-parsing`, YAML specs). They can't be combined with
-`--python-compat`. Numbers below are for the v5.0 OpenShift schemas
-(`--stand-alone --strict`, 2050 files).
+`--python-compat`.).
 
 - **`--fix-parsing`**: numbers and YAML values. Python reads the spec with
   YAML 1.1 rules, so the JSON number `1e3` becomes the *string* `"1e3"`, and
@@ -114,70 +71,28 @@ These are off by default, because they change published Kubernetes schemas
   `true`/`false` are booleans, `0755` is 755 (`0o755` is octal) and `1:30`
   is a string. A YAML spec that writes `default: yes` for a boolean now gets
   the string `"yes"`. Floats are still written the way Python prints them
-  (`1000.0`, `1e-05`). Changes no OpenShift files: their specs only have
-  whole numbers.
+  (`1000.0`, `1e-05`). 
 - **`--fix-ref-siblings`**: keep the description next to a `$ref`. When
   `--stand-alone` inlines `{"description": "...", "$ref": "..."}`, Python
   keeps only the target, so field descriptions are lost. The fix lays the
   annotations from next to the `$ref` over the inlined copy, and the field's
-  own value wins: `description`, `title`, `default`, `example`, `examples`,
+  own value override: `description`, `title`, `default`, `example`, `examples`,
   `deprecated`, `readOnly`, `writeOnly`, `$comment`, `externalDocs` and any
   `x-` extension. Keywords that change validation (`type`, `properties` and
-  so on) are still ignored, as JSON Schema draft 4 to 7 and OpenAPI 2 and
-  3.0 require. A definition that is only a `$ref` also keeps its `$schema`
-  line. Changes 1538 files, mostly a better `metadata` description.
+  so on) are still ignored, as OpenAPI 2 and 3.0 require.
 - **`--fix-nullable`**: required top-level fields. With `--kubernetes`,
   fields that aren't required accept `null`. Python checks `required` for
   nested fields but not top-level ones, so `spec: null` passes for a Route
   even though `spec` is required. The fix checks the top level the same way.
   Changes 1346 files. Manifests that set a required top-level field to
   `null` will start failing.
-- **`--fix-kind-names`**: which definition `kind.json` comes from. Without
+- **`--fix-kind-names`**: Without
   `--expanded`, definitions that share a kind share a file, and Python keeps
-  the last one in the spec. The fix keeps the best one that was written
+  the last one in the spec. This fix try's to keep the best one that was written
   successfully: a real API resource (`x-kubernetes-group-version-kind`) over a
   helper type; then the most stable and newest version (v2 > v1 > v1beta2 >
-  v1beta1 > v1alpha1); then the core group. Ties still go to the last one.
-  Changes 23 files, for example `event.json` (now core v1, was
-  `events.k8s.io/v1`), `node.json` (now the core Node, was OpenShift's
-  `config.openshift.io` Node), `probe.json` (now the Prometheus `Probe`
-  resource, was the liveness probe struct) and the Gateway API kinds (now v1,
-  were v1beta1). `kind-group-version.json` files don't change.
-
-### Kept as they are
-
-- **Array items and map values accept `null`** with `--kubernetes` (for
-  example each entry in `containers`, or a label value), because the
-  `required` check only applies to named fields. `--fix-nullable` doesn't
-  change this.
-- **OpenAPI 3 refs to a definition that lost a file-name clash** point at the
-  file that was kept, since both have the same name.
-
-### Other small differences
-
-None of these change the output for valid specs:
-
-- `-o` can be an absolute path (the Python tool needed a relative one for
-  `--stand-alone`).
-- A YAML spec with an unquoted date stays a string. The Python tool fails on
-  it.
-- Fatal errors are a one-line message, not a Python traceback.
-
-## How it works
-
-The code is in `internal/convert`:
-
-- `value.go`: the data model. Maps keep insertion order like Python dicts,
-  and maps and lists are shared by pointer, because the Python code changes
-  objects in place and relies on those changes being seen elsewhere.
-- `decode.go`: JSON and YAML parsing with PyYAML's rules.
-- `encode.go`: writes JSON exactly like Python's `json.dumps(indent=2)`.
-- `ref.go`: `$ref` inlining, copying how jsonref 0.2 behaves. jsonref
-  deep-copies the whole definitions file for every schema, which is why the
-  Python tool is slow. Here only the parts a schema actually reaches are
-  copied, which gives the same result.
-- `util.go`, `convert.go`: the conversion steps, ported line by line.
-
+  v1beta1 > v1alpha1); then the core group. a complete tie still go to the last one.
+  
 ## Testing
 
 ```sh
